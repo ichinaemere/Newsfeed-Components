@@ -1,6 +1,14 @@
 /* This is the data we will be using to create our article components */
 /* Look over this data, then proceed to line 91*/
-const data = [
+const articleData = [
+  {
+    title: "All things Chinaemere",
+    date: 'August 7th, 2019',
+    firstParagraph: "What would you like to know?",
+    secondParagraph: "Am I really that boring?",
+    thirdParagraph: "Ok, you guessed it, I love Beyonce."
+
+  },
   {
     title: 'Lambda School Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
@@ -112,3 +120,56 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+
+window.addEventListener('load', function(event){
+
+  const articles = document.querySelector('.articles');
+
+    articleData.forEach(data => {
+      articles.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
+    });
+
+    //Step 1 - Create Function
+
+    function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph){
+
+      // define new elements
+      const article = document.createElement('div');
+      const articleTitle = document.createElement('h2');
+      const articleDate = document.createElement('p');
+      const articleContentOne = document.createElement('p');
+      const articleContentTwo = document.createElement('p');
+      const articleContentThree = document.createElement('p');
+      const articleButton = document.createElement('span');
+
+      //Setup structure of elements
+      article.appendChild(articleTitle);
+      article.appendChild(articleDate);
+      article.appendChild(articleContentOne);
+      article.appendChild(articleContentTwo);
+      article.appendChild(articleContentThree);
+      article.appendChild(articleButton);
+
+      //Set class names
+      article.classList.add('article');
+      articleDate.classList.add('date');
+      articleButton.classList.add('expandButton')
+
+      //set text content/img src
+      articleContentOne.textContent = firstParagraph;
+      articleContentTwo.textContent = secondParagraph;
+      articleContentThree.textContent = thirdParagraph;
+      articleTitle.textContent = title;
+      articleDate.textContent = date;
+      articleButton.textContent = "button";
+
+      //Expanding button
+      articleButton.addEventListener('click', function(event){
+        article.classList.toggle('article-open');
+      });
+
+      return article
+    }
+
+
+});
